@@ -1,3 +1,6 @@
 [submodule "public/FDE-Source"]
 	path = public/FDE-Source
 	url = https://github.com/0xtaruhi/FDE-Source
+[submodule "public/yosys-Source"]
+	path = public/yosys-Source
+	url = https://github.com/YosysHQ/yosys
