@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "setup-binaries": "node scripts/setup-binaries.js",
+    "setup-binaries": "node scripts/setup-binaries.cjs",
     "tauri": "tauri"
   },
   "dependencies": {

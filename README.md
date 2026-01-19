@@ -90,12 +90,42 @@ export LIBRARY_PATH=${LIBRARY_PATH}:/usr/local/opt/icu4c/lib
 ```
 3. **IMPORTANT**: **DO NOT CHANGE THE BUILD DIRECTORY NAME!**
 
+#### Build Yosys
+
+UFDE+ relies on [Yosys](https://github.com/YosysHQ/yosys) as its synthesis backend.  
+There are **two supported ways** to prepare the Yosys binaries:
+
+##### Option 1: Build Yosys from source (recommended for development)
+
+You can clone and build Yosys manually under the `public` directory:
+
+```bash
+cd public
+git clone https://github.com/YosysHQ/yosys.git
+cd yosys
+make -j$(nproc)
+```
+After compilation, make sure the following executables are generated:
+
+yosys
+
+yosys-abc
+
+##### Option 2: Use prebuilt Yosys binaries
+
+Alternatively, you may directly copy the prebuilt binaries into the yosys directory: `public/yosys`
+
+
 #### Build UFDE+
 
 Change the current directory to the root directory of UFDE+ and run the following command to install the dependencies:
 
 ```bash
 pnpm install
+```
+Copy all required backend binaries(FDE CLI and Yosys) into the Tauri directory.
+```bash
+pnpm run setup-binaries
 ```
 
 Then, run the following command to start the application:

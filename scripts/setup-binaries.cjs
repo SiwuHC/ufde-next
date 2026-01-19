@@ -10,7 +10,7 @@ const path = require('path');
 
 const PROJECT_ROOT = path.join(__dirname, '..');
 const PUBLIC_FDE_BUILD = path.join(PROJECT_ROOT, 'public/FDE-Source/build/bin');
-const PUBLIC_YOSYS_BUILD = path.join(PROJECT_ROOT, 'public/yosys/build/bin');
+const PUBLIC_YOSYS_BUILD = path.join(PROJECT_ROOT, 'public/yosys');
 const BINARIES_DIR = path.join(PROJECT_ROOT, 'src-tauri/binaries');
 const FDE_CLI_DIR = path.join(BINARIES_DIR, 'fde-cli');
 
