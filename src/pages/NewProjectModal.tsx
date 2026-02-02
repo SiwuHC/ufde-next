@@ -176,6 +176,8 @@ function NewProjectStep2(props: StepProps) {
         { name: t("sourcefile.verilog"), extensions: ["v"] },
         { name: t("sourcefile.systemverilog"), extensions: ["sv"] },
         { name: t("sourcefile.constraint"), extensions: ["xml"] },
+        { name: t("sourcefile.cpp"), extensions: ["cpp", "cc", "cxx"] },
+        { name: t("sourcefile.c"), extensions: ["c"] },
       ],
     })) as string[];
 

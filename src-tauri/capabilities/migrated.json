@@ -113,6 +113,12 @@
         },
         {
           "args": true,
+          "cmd": "",
+          "name": "binaries/bambu",
+          "sidecar": true
+        },
+        {
+          "args": true,
           "cmd": "code.cmd",
           "name": "vscode.cmd",
           "sidecar": false

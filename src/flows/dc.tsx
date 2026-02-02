@@ -18,11 +18,12 @@ export async function runDCImportFlowCommand(project: ProjectInfo) {
 
   const celllibfilePath = await resolveResource("resource/hw_lib/dc_cell.xml");
   const outputFileName = project.name + "_dc_" + "imp.xml";
+  const cwd = await getDirOfFile(project.path);
 
   const command = Command.sidecar(
     "binaries/fde-cli/import",
     ["-x", outputFileName, "-l", celllibfilePath, "-e", files?.join(" ") ?? ""],
-    { cwd: await getDirOfFile(project.path) }
+    { cwd: cwd }
   );
 
   return command;

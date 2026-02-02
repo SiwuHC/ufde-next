@@ -4,7 +4,7 @@ import { readTextFile } from "@tauri-apps/plugin-fs";
 export type SourceFile = {
   name: string;
   path: string;
-  type: "verilog" | "systemverilog" | "constraint" | "unknown";
+  type: "verilog" | "systemverilog" | "constraint" | "cpp" | "c" | "unknown";
 };
 
 export type ProjectSettings = {
@@ -13,7 +13,11 @@ export type ProjectSettings = {
   };
   place: {
     mode: "Timing Driven" | "Bounding Box";
-  }
+  };
+  bambu?: {
+    topFunction?: string;
+    clockPeriod?: number;
+  };
 }
 
 export type ProjectInfo = {

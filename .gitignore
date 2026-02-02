@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 public/yosys
+.github
+.claude
+bambu_examples
+test_ufde
 
 # Editor directories and files
 .vscode/*

@@ -38,6 +38,7 @@ import { useCallback } from "react";
 import { dcFlows } from "../flows/dc";
 import { getDirOfFile } from "../utils/utils";
 import { yosysFlows } from "../flows/yosys";
+import { bambuFlows } from "../flows/bambu";
 
 const flowData: {
   value: string;
@@ -46,6 +47,7 @@ const flowData: {
 }[] = [
   { value: "DC", label: "DC", data: dcFlows },
   { value: "Yosys", label: "Yosys", data: yosysFlows },
+  { value: "Bambu", label: "Bambu HLS", data: bambuFlows },
 ];
 
 const flowsNameMap = (name: string) => {
@@ -171,7 +173,7 @@ export interface FlowProps {
 interface FlowInfo {
   name: string;
   target_file?: string;
-  runFunc?: (project: ProjectInfo) => Promise<Command> | Promise<undefined>;
+  runFunc?: (project: ProjectInfo) => Promise<Command<string> | undefined>;
   settingsPage?: React.ReactNode;
   extraActions?: React.ReactNode;
 }
@@ -184,16 +186,15 @@ function FlowInstance(props: FlowInfo & FlowProps) {
 
   const run = async () => {
     setStatusText("");
-    const command = props.runFunc
-      ? await props.runFunc(projectContext.project!)
-      : undefined;
-    if (command) {
+    try {
+      const command = props.runFunc
+        ? await props.runFunc(projectContext.project!)
+        : undefined;
+      if (command) {
       command.stdout.on("data", (data) => {
-        console.log(data);
         setStatusText((prevTest) => prevTest + data);
       });
       command.stderr.on("data", (data) => {
-        console.log(data);
         setStatusText((prevTest) => prevTest + data);
       });
 
@@ -234,11 +235,16 @@ function FlowInstance(props: FlowInfo & FlowProps) {
 
       command.execute().then((res) => {
         if (res.code !== 0) {
-          onError("Code = " + res.code);
+          onError("Code = " + res.code + ", stdout: " + res.stdout + ", stderr: " + res.stderr);
         } else {
           onSuccess();
         }
-      }, onError);
+      }, (err) => {
+        onError(err);
+      });
+    }
+    } catch (error) {
+      console.error("Error in run function:", error);
     }
   };
 
@@ -320,8 +326,11 @@ function FlowPage() {
   const projectContext = useContext(ProjectContext);
   const project = projectContext.project;
   const { t } = useTranslation();
+  const [active, setActive] = useState(0);
 
   const run = async (flow: FlowInfo) => {
+    let runSuccess = false;
+
     const notifyId = notifications.show({
       title: t("flow.notify.running.title"),
       message:
@@ -332,8 +341,8 @@ function FlowPage() {
       loading: true,
     });
 
-    const command = flow.runFunc ? await flow.runFunc(project!) : undefined;
-    let runSuccess = false;
+    try {
+      const command = flow.runFunc ? await flow.runFunc(project!) : undefined;
 
     const onSuccess = () => {
       setActive(active + 1);
@@ -368,12 +377,15 @@ function FlowPage() {
         } else {
           onSuccess();
         }
-      }, onError);
+      }, (err) => {
+        onError(err);
+      });
+    }
+    } catch (error) {
+      console.error("Error in run function:", error);
     }
     return runSuccess;
   };
-
-  const [active, setActive] = useState(0);
 
   const runAll = useCallback(async () => {
     const flows = flowsNameMap(flowName)!;
@@ -386,7 +398,7 @@ function FlowPage() {
       }
       setActive(i + 1);
     }
-  }, []);
+  }, [flowName]);
 
   return (
     <>

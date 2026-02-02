@@ -15,7 +15,12 @@
   },
   "settings": {
     "language": "言語",
-    "general": "一般"
+    "general": "一般",
+    "bambu": {
+      "title": "Bambu HLS",
+      "path": "Bambu 実行ファイルパス",
+      "path_description": "Bambu HLS AppImage または実行ファイルへのパス"
+    }
   },
   "project": {
     "create_a_new_project": "新規プロジェクトを作成しよう！",
@@ -137,6 +142,64 @@
         "description": "対象デバイスのビットストリームファイルの生成"
       }
     },
+    "yosys": {
+      "yosys": {
+        "title": "論理合成",
+        "description": "Yosys ツールを使用して論理合成を行い、論理ネットリストを生成する"
+      },
+      "map": {
+        "title": "プロセス・マッピング",
+        "description": "論理ネットリストを対象デバイスのプリミティブにマッピングする"
+      },
+      "pack": {
+        "title": "論理パッケージング",
+        "description": "LUT を論理ブロックにパッケージングする"
+      },
+      "place": {
+        "title": "レイアウト",
+        "description": "論理ブロックを対象デバイスに配置"
+      },
+      "route": {
+        "title": "ワイヤリング",
+        "description": "論理ブロック間の接続を対象デバイスにワイヤリングする"
+      },
+      "genbit": {
+        "title": "ビットストリームの生成",
+        "description": "対象デバイスのビットストリームファイルの生成"
+      }
+    },
+    "bambu": {
+      "hls": {
+        "title": "高位合成",
+        "description": "Bambu を使用して C/C++ コードを Verilog に変換する",
+        "top_function": "トップ関数",
+        "clock_period": "クロック周期 (ns)"
+      },
+      "synth": {
+        "title": "論理合成",
+        "description": "Yosys を使用して HLS 生成の Verilog を合成する"
+      },
+      "map": {
+        "title": "プロセス・マッピング",
+        "description": "論理ネットリストを対象デバイスのプリミティブにマッピングする"
+      },
+      "pack": {
+        "title": "論理パッケージング",
+        "description": "LUT を論理ブロックにパッケージングする"
+      },
+      "place": {
+        "title": "レイアウト",
+        "description": "論理ブロックを対象デバイスに配置"
+      },
+      "route": {
+        "title": "ワイヤリング",
+        "description": "論理ブロック間の接続を対象デバイスにワイヤリングする"
+      },
+      "genbit": {
+        "title": "ビットストリームの生成",
+        "description": "対象デバイスのビットストリームファイルの生成"
+      }
+    },
     "notify": {
       "running": {
         "title": "稼働中",
@@ -161,7 +224,9 @@
   "sourcefile": {
     "verilog": "Verilog ファイル",
     "systemverilog": "SystemVerilog ファイル",
-    "constraint": "制約ファイル"
+    "constraint": "制約ファイル",
+    "cpp": "C++ ソースファイル",
+    "c": "C ソースファイル"
   },
   "other": {
     "vscode_not_found": "Visual Studio Code が見つかりませんでした。インストールしてから、もう一度お試しください。"

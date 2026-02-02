@@ -34,6 +34,12 @@ export async function getFileInfoByPath(path: string): Promise<SourceFile> {
         return "systemverilog";
       case "xml":
         return "constraint";
+      case "cpp":
+      case "cc":
+      case "cxx":
+        return "cpp";
+      case "c":
+        return "c";
       default:
         return "unknown";
     }

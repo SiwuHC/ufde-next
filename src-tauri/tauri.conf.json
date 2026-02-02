@@ -31,7 +31,8 @@
       "binaries/fde-cli/route",
       "binaries/fde-cli/sta",
       "binaries/yosys",
-      "binaries/yosys-abc"
+      "binaries/yosys-abc",
+      "binaries/bambu"
     ]
   },
   "productName": "UFDE+",

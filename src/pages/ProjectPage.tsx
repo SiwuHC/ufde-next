@@ -26,6 +26,8 @@ function SourceFileSection() {
         { name: t("sourcefile.verilog"), extensions: ["v"] },
         { name: t("sourcefile.systemverilog"), extensions: ["sv"] },
         { name: t("sourcefile.constraint"), extensions: ["xml"] },
+        { name: t("sourcefile.cpp"), extensions: ["cpp", "cc", "cxx"] },
+        { name: t("sourcefile.c"), extensions: ["c"] },
       ],
     })) as string[];
 
@@ -67,11 +69,11 @@ function SourceFileSection() {
       return (
         <Table.Tr
           key={file.name}
-          onDoubleClick={async () => {
+                  onDoubleClick={async () => {
             const platformName = await platform();
             const cmdStr = /^win/i.test(platformName) ? "vscode.cmd" : "vscode";
-            const command = new Command(cmdStr, file.path);
-            command.spawn().catch((_) => {
+            const command = await Command.create(cmdStr, [file.path]);
+            command.spawn().catch((_: unknown) => {
               showFailedNotification({ message: "other.vscode_not_found", title: "" });
             });
           }}
